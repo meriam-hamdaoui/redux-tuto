@@ -1,15 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider, connect } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import "./index.css";
 import App from "./containers/App";
 import registerServiceWorker from "./registerServiceWorker";
 import "tachyons";
 import { searchRobots } from "./reducers";
+import { createLogger } from "redux-logger";
 
+//it helps to debugg our app easily
+const logger = createLogger();
 //we gonna create our stare wher we're gonna stock all of action states
-const store = createStore(searchRobots);
+const store = createStore(searchRobots, applyMiddleware(logger));
 
 // ReactDOM.render(<App store={store} />, document.getElementById("root"));
 //instead of passing the store as a props all a long
